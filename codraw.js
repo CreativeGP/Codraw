@@ -1,3 +1,5 @@
+const stream = new Stream('client/app.php', 'client/rec.php', 'client/shop.php');
+
 $(window).on('load resizeend', function () {
 		let c = document.getElementById("drawn");
 		let ctx = c.getContext("2d");
