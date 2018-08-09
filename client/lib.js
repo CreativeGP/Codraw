@@ -1,8 +1,8 @@
 /*
-FastSSE v0.1.1
+  FastSSE v0.1.1
 
-Creative GP
-2018/07/29 (yyyy/mm/dd)
+  Creative GP
+  2018/07/29 (yyyy/mm/dd)
 */
 'use strict';
 
@@ -39,13 +39,15 @@ class Stream {
 
 	ask_tag(tags, pass) {
 		let cloj = function (self, tags, pass, callback) {
-			return function () { return callback(this.responseText, self, tags, pass) }; 
+			return function () {
+				return callback(this.responseText, self, tags, pass);
+			};
 		};
 		let onload = function (text, self, atags, apass) {
 			if (text == "") {
 				const tags = atags.split(',');
 				const pass = apass.split(',');
-				for (let i=0, len=tags.length; i < len; ++i) {
+				for (let i = 0, len = tags.length; i < len; ++i) {
 					self.taginfo[tags[i]] = pass[i];
 				}
 			}
