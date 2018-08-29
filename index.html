@@ -22,22 +22,22 @@
 			<h3>Co-Draw</h3>
 			<h2>Choose a Room</h2>
 			<p>What room do you want to join?</p>
-			<input name="" type="text" value=""/>
+			<input id="join-room-name" name="" type="text" value=""/>
 			<p>Password (optional)</p>
-			<input name="" type="password" value=""/>
+			<input id="join-room-pass" name="" type="password" value=""/>
 			<button class="btn-link" id="to3" onclick="trans(this);" type="button">Create New One?</button>
-			<button class="btn-primary" id="to4" onclick="trans(this);" type="button">CONNECT</button>
+			<button class="btn-primary" onclick="join(this);" type="button">CONNECT</button>
 		</div>
 
 		<div id="3" class="content">
 			<h3>Co-Draw</h3>
 			<h2>Create a New Room</h2>
 			<p>Room name</p>
-			<input name="" type="text" value=""/>
+			<input id="create-room-name" name="" type="text" value=""/>
 			<p>Password (optional)</p>
-			<input name="" type="password" value=""/>
+			<input id="create-room-pass" name="" type="password" value=""/>
 			<button id="to2" class="btn-link" onclick="trans(this);"  type="button">Join Existing One?</button>
-			<button class="trans btn-primary" type="button">CREATE</button>
+			<button onclick="create(this);" class="btn-primary" type="button">CREATE</button>
 		</div>
 
 		
@@ -48,6 +48,16 @@
 			 let a = e.id.replace('to', '');
 			 $('#content').html($(`#${a}`).html());
 		 }
+		 
+		function create(e) {
+			window.location.href = `https://cretgp.com/lab/codraw/play.html?room=${document.getElementById('create-room-name').value}&pass=${document.getElementById('create-room-pass').value}`;
+		}
+
+		function join(e) {
+			window.location.href = `https://cretgp.com/lab/codraw/play.html?room=${document.getElementById('join-room-name').value}&pass=${document.getElementById('join-room-pass').value}`;
+		}
+
 		</script>
+		<script src="index.js"></script>
 	</body>
 </html>

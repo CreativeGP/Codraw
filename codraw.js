@@ -1,17 +1,40 @@
-let ROOM = 'general';
-let PASSWORD = '';
+function gep(key) {
+    var str = location.search.split("?");
+    if (str.length < 2) {
+        return "";
+    }
+
+    var params = str[1].split("&");
+    for (var i = 0; i < params.length; i++) {
+        var keyVal = params[i].split("=");
+        if (keyVal[0] == key && keyVal.length == 2) {
+        return decodeURIComponent(keyVal[1]);
+        }
+    }
+    return "";
+}
+
+let ROOM = gep('room');
+let PASSWORD = gep('pass');
 
 const stream = new Stream('client/app.php', 'client/rec.php', 'client/shop.php',
                           () => {
                             stream.add_tag(ROOM, PASSWORD);
-                            setTimeout(() => stream.ask_tag(ROOM, PASSWORD), 1000);
+                            setTimeout(() => {
+                                stream.ask_tag(ROOM, PASSWORD);
+                                if ($("#status").text() == "") {
+                                    $("#status").text(`CONNECTED @ ${ROOM}`);
+                                    $("#status").css('background-color', 'lightgreen');
+                                }    
+                            }, 1000);
                           });
 
 let canvases = {};
 
 stream.OnError = err => {
-    console.log("Error: ");
-    cosole.log(err);
+    $("#status").text(`ERROR @ ${ROOM}`);
+    $("#status").css('background-color', 'red');
+
 };
 
 $(window).on('load resizeend', function () {
@@ -19,9 +42,6 @@ $(window).on('load resizeend', function () {
     let ctx = c.getContext("2d");
 
     stream.OnMessage = (e, from, data) => {
-        console.log("Data Received.");
-        console.log(`data: ${from} ${data}`);
-
         if (from == stream.id) {
             return;
         }
