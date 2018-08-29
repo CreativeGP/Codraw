@@ -1,3 +1,7 @@
+.gitignore
+.ftpconfig.json
+
+
 # Logs
 logs
 *.log

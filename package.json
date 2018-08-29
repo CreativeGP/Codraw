@@ -1,0 +1,25 @@
+{
+  "name": "codraw",
+  "version": "1.0.0",
+  "description": "Draw it together.",
+  "main": "codraw.js",
+  "dependencies": {
+    "browser-sync": "^2.24.7",
+    "gulp": "^3.9.1",
+    "gulp-ftp": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CreativeGP/Codraw.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CreativeGP/Codraw/issues"
+  },
+  "homepage": "https://github.com/CreativeGP/Codraw#readme"
+}
