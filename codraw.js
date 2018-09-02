@@ -84,8 +84,13 @@ $(window).on('load resizeend', function () {
     let divPos = {};
     let path = [];
 
-    c.onmousedown = function(e) {
+    $(c).on('mousedown touchstart', (e) => {
         isDrawing = true;
+
+        if (!e.pageX) {
+            e.offsetX = event.touches[0].pageX;
+            e.offsetY = event.touches[0].pageY-50;
+        }
 
         divPos = {
             left: e.offsetX,
@@ -94,9 +99,15 @@ $(window).on('load resizeend', function () {
         path.push([divPos.left, divPos.top]);
         //stream.send(`d ${divPos.left} ${divPos.top}`, ROOM);
         ctx.moveTo(divPos.left, divPos.top);
-    };
-    c.onmousemove = function(e) {
+    });
+    $(c).on('mousemove touchmove', (e) => {
         if (isDrawing) {
+
+            if (!e.pageX) {
+                e.offsetX = event.touches[0].pageX;
+                e.offsetY = event.touches[0].pageY-50;
+            }
+
             divPos = {
                 left: e.offsetX,
                 top: e.offsetY - e.offsetY*(50/900)
@@ -106,8 +117,8 @@ $(window).on('load resizeend', function () {
             ctx.lineTo(divPos.left, divPos.top);
             ctx.stroke();
         }
-    };
-    c.onmouseup = function() {
+    });
+    $(c).on('mouseup touchend', () => {
         isDrawing = false;
 
         let payload = "";
@@ -117,5 +128,5 @@ $(window).on('load resizeend', function () {
         path = [];
 
         stream.send(payload, ROOM);
-    };
+    });
 });
